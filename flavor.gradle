@@ -1,0 +1,16 @@
+android {
+    flavorDimensions "mode"
+    productFlavors {
+        beta {
+            dimension "mode"
+            applicationIdSuffix ".beta"
+            buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org/data/2.5/\""
+            buildConfigField "String", "API_APP_ID", API_APP_ID
+        }
+        product {
+            dimension "mode"
+            buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org/data/2.5/\""
+            buildConfigField "String", "API_APP_ID", API_APP_ID
+        }
+    }
+}
