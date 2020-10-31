@@ -18,7 +18,7 @@ class WeatherRemoteDataSource @Inject constructor(
                     .list
                     ?.map {
                         Weather(
-                            id = (it.date + weatherResp.city!!.id).toInt(),
+                            id = "${it.date}${weatherResp.city!!.id}",
                             temp = (it.temp.min + it.temp.max) / 2,
                             pressure = it.pressure,
                             date = it.date.toDate(),
