@@ -18,7 +18,6 @@ class WeatherViewModel @Inject constructor(
 
     private val _searchResult = _doSearch.switchMap { weatherRepository.searchWeatherByCity(it) }
     val searchResult = _searchResult
-    val isSearching = _doSearch.map { it.isNotEmpty() }
 
     fun search() {
         _doSearch.value = searchQueryLiveData.value?.trim()

@@ -1,10 +1,10 @@
 package com.littleevil.nabweatherforecast.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.littleevil.nabweatherforecast.R
 import com.littleevil.nabweatherforecast.databinding.ActivityWeatherBinding
 import com.littleevil.nabweatherforecast.ext.hideKeyboard
+import com.littleevil.nabweatherforecast.util.Result
 import com.scottyab.rootbeer.RootBeer
 import dagger.hilt.android.AndroidEntryPoint
-import com.littleevil.nabweatherforecast.util.Result
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -60,15 +60,13 @@ class WeatherActivity : AppCompatActivity() {
         weatherViewModel.queryError.observe(this) {
             dataBinding.searchInputLayout.error = if (it.isEmpty()) null else it
         }
-        weatherViewModel.isSearching.observe(this) {
-            hideKeyboard()
-        }
         weatherViewModel.searchResult.observe(this) { result ->
             when (result.status) {
                 Result.Status.LOADING -> {
                     dataBinding.progressBar.visibility = View.VISIBLE
                     dataBinding.weatherListView.visibility = View.GONE
                     dataBinding.tvError.visibility = View.GONE
+                    hideKeyboard()
                 }
                 Result.Status.ERROR -> {
                     dataBinding.tvError.visibility = View.VISIBLE
