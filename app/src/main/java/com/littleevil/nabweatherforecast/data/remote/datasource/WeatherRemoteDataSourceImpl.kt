@@ -7,10 +7,14 @@ import com.littleevil.nabweatherforecast.ext.toDate
 import com.littleevil.nabweatherforecast.util.Result
 import javax.inject.Inject
 
-class WeatherRemoteDataSource @Inject constructor(
+interface WeatherRemoteDataSource {
+    suspend fun searchWeather(city: String, appId: String): Result<List<Weather>>
+}
+
+class WeatherRemoteDataSourceImpl @Inject constructor(
     private val weatherService: WeatherService
-) : BaseDataSource() {
-    suspend fun searchWeather(city: String, appId: String): Result<List<Weather>> =
+) : BaseDataSource(), WeatherRemoteDataSource {
+    override suspend fun searchWeather(city: String, appId: String): Result<List<Weather>> =
         getResult(
             call = { weatherService.searchWeather(city, appId = appId) },
             bodyMapping = { weatherResp: WeatherSearchResp ->
