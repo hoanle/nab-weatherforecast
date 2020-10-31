@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -30,6 +31,7 @@
                 android:inputType="textPersonName"
                 android:lines="1"
                 android:maxLines="1"
+                android:text="@={viewModel.searchQueryLiveData}"
                 android:textSize="@dimen/default_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,6 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_normal"
+            android:enabled="@{viewModel.searchQueryLiveData.length() > 3}"
+            android:onClick="@{() -> viewModel.search()}"
             android:text="@string/get_weather" />
 
         <FrameLayout
@@ -69,6 +73,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/large_text_size"
                 android:visibility="gone"
+                app:drawableTopCompat="@drawable/ic_warning_black_24dp"
                 tools:visibility="visible" />
         </FrameLayout>
 

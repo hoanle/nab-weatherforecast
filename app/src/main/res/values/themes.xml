@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="AutoSizeTextView" parent="Widget.AppCompat.TextView">
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/default_text_size</item>
+        <item name="autoSizeMaxTextSize">100sp</item>
+        <item name="autoSizeStepGranularity">2sp</item>
+    </style>
 </resources>
